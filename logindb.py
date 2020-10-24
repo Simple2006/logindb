@@ -53,19 +53,18 @@ def loginAcc():
             print("User not found")
         elif usercheck == line.strip():
             user.close()
-            passcheck = input("Enter your password: ")
-            lpasscheck = hashlib.md5(usercheck.encode())
-            passcheck = lpasscheck.hexdigest()
-            passw = open("passwords.txt", "r")
-            checkpassC = passw.readlines()
-            for line in checkpassC:
-                if passcheck != line.strip():
-                    print("Password incorrect")
-                    sys.exit()
-                elif passcheck == line.strip():
-                    passw.close()
-                    print("Logging In...")
-                    return
+    passcheck = input("Enter your password: ")
+    lpasscheck = hashlib.md5(passcheck.encode())
+    passcheck = lpasscheck.hexdigest()
+    passw = open("passwords.txt", "r")
+    checkpassC = passw.readlines()
+    for line in checkpassC:
+        if passcheck != line.strip():
+            print("Password incorrect")
+            sys.exit()
+        elif passcheck == line.strip():
+            passw.close()
+            print("Logging In...")
 
 reglog = input("Login or Register | L or R: ")
 if reglog.lower() == "r":
