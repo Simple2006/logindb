@@ -15,15 +15,16 @@ def register():
     username1 = input("Enter your username: ")
     password1 = input("Enter your password: ")
     info1 = loginData(name1, bday1, email1, username1, password1)
+    if len(info1.password) < 8:
+        print("Password too short!")
+        sys.exit()
     lusername = hashlib.md5(info1.username.encode())
     lpassword = hashlib.md5(info1.password.encode())
     info1.username = lusername.hexdigest()
     info1.password = lpassword.hexdigest()
     extrainfo = open("extrainfo.txt", "a")
     extrainfo.write(f"Name: {info1.name}\nBirthday: {info1.bday}\nEmail: {info1.email}\n")
-    if len(info1.password) < 8:
-        print("Password too short!")
-    if len(info1.password) >= 8:
+    if len(info1.password) >= 8: #condition will be met because of hashing but doesnt matter because [else -> > 8]
         user = open("usernames.txt", "r")
         userC = user.readlines()
         for line in userC:
